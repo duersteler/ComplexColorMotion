@@ -1,0 +1,50 @@
+﻿<Application xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+             xmlns:toolkit="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
+             x:Class="ColorIllusions2.App"
+             >
+    <Application.Resources>
+        <Style TargetType="TextBlock" x:Key="Label1">
+            <Setter Property="FontFamily" Value="Trebuchet MS" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontStyle" Value="Normal" />
+            <Setter Property="FontWeight" Value="Normal" />
+            <Setter Property="Foreground" Value="Yellow" />
+        </Style>
+        <Style TargetType="TextBlock" x:Key="Title1">
+            <Setter Property="FontFamily" Value="Trebuchet MS" />
+            <Setter Property="FontSize" Value="28" />
+            <Setter Property="FontStyle" Value="Normal" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="Gold" />
+        </Style>
+        <Style TargetType="TextBlock" x:Key="Subtitle1">
+            <Setter Property="FontFamily" Value="Trebuchet MS" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontStyle" Value="Normal" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="Gold" />
+        </Style>
+        <Style TargetType="toolkit:NumericUpDown" x:Key="NumUpDown1">
+            <Setter Property="FontFamily" Value="Trebuchet MS" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontStyle" Value="Normal" />
+            <Setter Property="FontWeight" Value="Normal" />
+            <Setter Property="Foreground" Value="Yellow" />
+            <Setter Property="Width" Value="60" />
+            <Setter Property="DecimalPlaces" Value="1" />
+            <Setter Property="Minimum" Value="0" />
+            <Setter Property="Maximum" Value="100" />
+            <Setter Property="Increment" Value="1" />
+            <Setter Property="Margin" Value="5,0,0,0"/>
+         </Style>
+        <Style TargetType="TextBlock" x:Key="FilmTitle">
+            <Setter Property="FontFamily" Value="Trebuchet MS" />
+            <Setter Property="FontSize" Value="32" />
+            <Setter Property="FontStyle" Value="Normal" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="Gold" />
+        </Style>
+
+    </Application.Resources>
+</Application>

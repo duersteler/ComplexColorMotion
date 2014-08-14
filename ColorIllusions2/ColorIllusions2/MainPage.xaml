@@ -1,0 +1,340 @@
+﻿<UserControl x:Class="ColorIllusions2.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
+    xmlns:effects="clr-namespace:Shader.Effects"          
+    mc:Ignorable="d"
+    d:DesignHeight="720" d:DesignWidth="1505">
+
+    <Grid x:Name="LayoutRoot" Background="Darkblue" LayoutUpdated="LayoutRoot_LayoutUpdated" SizeChanged="LayoutRoot_LayoutUpdated" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="240"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="40"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="5" />
+        </Grid.RowDefinitions>
+        <ListBox Margin="0,2,0,0" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Height="45" Background="Transparent" Width="1224">
+            <TextBlock  x:Name="lbMainTitle"  Text="Contrast Modulated Complex Motion" Style="{StaticResource FilmTitle}"  />
+            <TextBlock Text=""  Style="{StaticResource FilmTitle}" />
+            <TextBlock Text="Rotation of iso-luminant sectors alone" Style="{StaticResource FilmTitle}" />
+            <TextBlock Text="Rotation standstill of iso-luminant sectors" Style="{StaticResource FilmTitle}" />
+            <TextBlock Text="Common rotation of iso-luminant sectors with random dot texture" Style="{StaticResource FilmTitle}" />
+            <TextBlock Text="Rotation capture of iso-luminant sectors by random dot texture"  Style="{StaticResource FilmTitle}" />
+            <TextBlock Text="Rotating of iso-luminant sectors with flickering dot texture"  Style="{StaticResource FilmTitle}" />
+            <TextBlock Text="Contraction/Expansion of iso-luminant rings alone" Style="{StaticResource FilmTitle}" />
+            <TextBlock Text="Scaling standstill of iso-luminant rings" Style="{StaticResource FilmTitle}" />
+            <TextBlock Text="Joint sscaling of iso-luminant rings with random dot texture" Style="{StaticResource FilmTitle}" />
+            <TextBlock Text="Scaling capture of iso-luminant  rings by random dot texture"  Style="{StaticResource FilmTitle}" />
+            <TextBlock Text="Motion standstill of iso-luminant  spirals" Style="{StaticResource FilmTitle}" />
+            <TextBlock Text="Joint spiraling motion of iso-luminant  spirals with random dot texture"  Style="{StaticResource FilmTitle}" />
+            <TextBlock Text="Spiraling motion capture of iso-luminant  spirals by random dot texture"  Style="{StaticResource FilmTitle}" />
+            <TextBlock Text="Shearing standstill of iso-luminant sectors" Style="{StaticResource FilmTitle}" />
+            <TextBlock Text="Joint Shearing of iso-luminant sectors with random dot texture" Style="{StaticResource FilmTitle}" />
+            <TextBlock Text="Shearing capture of iso-luminant sectors by random dot texture"  Style="{StaticResource FilmTitle}" />
+            <TextBlock Text=""  Style="{StaticResource FilmTitle}" />
+        </ListBox>
+        <StackPanel Grid.Column="0" Grid.Row="1" Margin="10,0,0,0">
+ 
+            <ListBox x:Name="Stimulus" Background="DarkBlue"  HorizontalAlignment="Left" Width="185" Height="35" SelectionChanged="Stimulus_SelectionChanged">
+                <TextBlock Text="Sectors" Style="{StaticResource Subtitle1}" />
+                <TextBlock Text="R-handed spirals" Style="{StaticResource Subtitle1}" />
+                <TextBlock Text="L-handed spirals" Style="{StaticResource Subtitle1}" />
+                <TextBlock Text="Rings" Style="{StaticResource Subtitle1}" />
+                <TextBlock Text="Wheel 4 spokes" Style="{StaticResource Subtitle1}" />
+                <TextBlock Text="Wheel 8 spokes" Style="{StaticResource Subtitle1}" />
+                <TextBlock Text="Wheel 16 spokes" Style="{StaticResource Subtitle1}" />
+                <TextBlock Text="Rot. grid 128" Style="{StaticResource Subtitle1}" />
+                <TextBlock Text="Rot. grid 256" Style="{StaticResource Subtitle1}" />
+                <TextBlock Text="Stepped sectors" Style="{StaticResource Subtitle1}" />
+                <TextBlock Text="Shear sectors" Style="{StaticResource Subtitle1}" />
+                <TextBlock Text="Shear rings" Style="{StaticResource Subtitle1}" />
+                <TextBlock Text="Shear LH spirals" Style="{StaticResource Subtitle1}" />
+                <TextBlock Text="Shear RH Spirals" Style="{StaticResource Subtitle1}" />
+                <TextBlock Text="Shear.v.grid 128" Style="{StaticResource Subtitle1}" />
+                <TextBlock Text="Shear.v.grid 256" Style="{StaticResource Subtitle1}" />
+                <TextBlock Text="Shear.h.grid 128" Style="{StaticResource Subtitle1}" />
+                <TextBlock Text="Shear.h.grid 256" Style="{StaticResource Subtitle1}" />
+                <!--
+                <TextBlock Text="Shear tex.sector" Style="{StaticResource Subtitle1}" />
+                <TextBlock Text="Shear text.rings" Style="{StaticResource Subtitle1}" />
+                <TextBlock Text="Shear tex.LH sp." Style="{StaticResource Subtitle1}" />
+                <TextBlock Text="Shear tex.RH sp." Style="{StaticResource Subtitle1}" />
+                <TextBlock Text="Shear text. v.g." Style="{StaticResource Subtitle1}" />
+                <TextBlock Text="Shear text. h.g." Style="{StaticResource Subtitle1}" />
+                -->
+            </ListBox>
+            <StackPanel x:Name="spCenterSpeed" Orientation="Vertical">
+                <TextBlock Text="Rotational" Margin="0,5,0,0" Style="{StaticResource Label1}" />
+                <StackPanel Orientation='Horizontal'>
+                    <TextBlock Text="velocity" Margin="0,0,0,2" Style="{StaticResource Label1}" />
+                    <toolkit:NumericUpDown x:Name="nudCenterSpeed" Minimum="-500.0" Maximum="500.0" ValueChanged="nudCenterRotationSpeed_ValueChanged" Style="{StaticResource NumUpDown1}" />
+                    <TextBlock Text='°/sec' Margin='2' Style="{StaticResource Label1}"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Vertical"  x:Name="spFrequency" >
+                <TextBlock Text="Temporal scaling" Margin="0,2,0,0" Style="{StaticResource Label1}" />
+                <StackPanel Orientation='Horizontal' >
+                    <TextBlock Text="frequency" Margin="0,0,0,2" Style="{StaticResource Label1}" />
+                    <toolkit:NumericUpDown x:Name="nudCenterScalingFrequency" Minimum="-50.0" Maximum="50.0" Increment="0.05" DecimalPlaces="2"
+                    ValueChanged="nudFrequency_ValueChanged" Style="{StaticResource NumUpDown1}" />
+                    <TextBlock Text='Hz' Margin='2' Style="{StaticResource Label1}"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel x:Name="spShearing" Orientation="Vertical">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Shearing motion" Margin="0,5,0,0" Style="{StaticResource Label1}" />
+                    <StackPanel Orientation='Horizontal'>
+                        <TextBlock Text="Factor" Margin="0,0,0,2" Style="{StaticResource Label1}" />
+                        <toolkit:NumericUpDown x:Name="nudShearingFactor" Minimum="0.0" Maximum="2.0" ValueChanged="nudShearingAmplitude_ValueChanged" Increment="0.1"
+                            DecimalPlaces="3" Value="1.1"  Style="{StaticResource NumUpDown1}" />
+                        <TextBlock Text='' Margin='2' Style="{StaticResource Label1}"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation='Horizontal'>
+                        <TextBlock Text="Angle" Margin="0,0,0,2" Style="{StaticResource Label1}" />
+                        <toolkit:NumericUpDown x:Name="nudShearingAngle" Minimum="0.0" Maximum="360.0" ValueChanged="nudShearingAngle_ValueChanged" Value="0.0" Increment="5"
+                            DecimalPlaces="0" Style="{StaticResource NumUpDown1}" />
+                        <TextBlock Text='°' Margin='2' Style="{StaticResource Label1}"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation='Horizontal'>
+                        <TextBlock Text="Frequency" Margin="0,0,0,2" Style="{StaticResource Label1}" />
+                        <toolkit:NumericUpDown x:Name="nudShearingFreq" Minimum="0.0" Maximum="100" ValueChanged="nudShearingFreq_ValueChanged" Value="1" Increment="0.1"
+                            DecimalPlaces="2" Style="{StaticResource NumUpDown1}" />
+                        <TextBlock Text='Hz' Margin='2' Style="{StaticResource Label1}"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel  x:Name="spStatShearDot" Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Stationary wheel" Margin="0,0,0,2" Style="{StaticResource Label1}" />
+                        <CheckBox x:Name="cbStatWheel" VerticalAlignment="Center" IsChecked="False" Click="cbStatWheel_Click" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Stationary dots" Margin="0,0,0,2" Style="{StaticResource Label1}" />
+                        <CheckBox x:Name="cbStatDot" VerticalAlignment="Center" IsChecked="True" Click="cbStatDot_Click" />
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation='Horizontal'>
+                <TextBlock Text="Zoom" Margin="0,0,0,2" Style="{StaticResource Label1}" />
+                <toolkit:NumericUpDown x:Name="nudZoom" Minimum="0" Maximum="400" Increment="1" DecimalPlaces="0" Value="100"
+                    ValueChanged="nudZoom_ValueChanged" Style="{StaticResource NumUpDown1}" />
+                <TextBlock Text='%' Margin='2' Style="{StaticResource Label1}"/>
+            </StackPanel>
+            <TextBlock Text="Stimulus RGB Ranges [0-255]" Margin="0,5,0,0" Style="{StaticResource Label1}" />
+            <StackPanel Orientation='Horizontal'>
+                <toolkit:NumericUpDown x:Name="nudWheelFromRed" DecimalPlaces="0" Minimum="0" Maximum="255" Increment="1" ValueChanged="nudWheelColor_ValueChanged" 
+                     Value="166"  Style="{StaticResource NumUpDown1}" />
+                <toolkit:NumericUpDown x:Name="nudWheelFromGreen" DecimalPlaces="0" Minimum="0" Maximum="255" Increment="1" ValueChanged="nudWheelColor_ValueChanged" 
+                     Value="47"  Style="{StaticResource NumUpDown1}" />
+                <toolkit:NumericUpDown x:Name="nudWheelFromBlue" DecimalPlaces="0" Minimum="0" Maximum="255" Increment="1" ValueChanged="nudWheelColor_ValueChanged" 
+                     Value="0"  Style="{StaticResource NumUpDown1}" />
+            </StackPanel>
+            <StackPanel Orientation='Horizontal'>
+                <toolkit:NumericUpDown x:Name="nudWheelToRed" DecimalPlaces="0" Minimum="0" Maximum="255" Increment="1" ValueChanged="nudWheelColor_ValueChanged" 
+                     Value="83"  Style="{StaticResource NumUpDown1}" />
+                <toolkit:NumericUpDown x:Name="nudWheelToGreen" DecimalPlaces="0" Minimum="0" Maximum="255" Increment="1" ValueChanged="nudWheelColor_ValueChanged" 
+                     Value="94"  Style="{StaticResource NumUpDown1}" />
+                <toolkit:NumericUpDown x:Name="nudWheelToBlue" DecimalPlaces="0" Minimum="0" Maximum="255" Increment="1" ValueChanged="nudWheelColor_ValueChanged" 
+                     Value="0"  Style="{StaticResource NumUpDown1}" />
+            </StackPanel>
+            <StackPanel Orientation='Horizontal'>
+                <TextBlock Text="Mask colors [0 - 255]" Margin="0,5,0,0" Style="{StaticResource Label1}" />
+             </StackPanel>
+            <StackPanel Orientation='Horizontal'>
+                <toolkit:NumericUpDown x:Name="nudMaskRed" DecimalPlaces="0" Minimum="0" Maximum="255" Increment="1" ValueChanged="nudMaskColor_ValueChanged" 
+                     Value="0"  Style="{StaticResource NumUpDown1}" />
+                <toolkit:NumericUpDown x:Name="nudMaskGreen" DecimalPlaces="0" Minimum="0" Maximum="255" Increment="1" ValueChanged="nudMaskColor_ValueChanged" 
+                     Value="0"  Style="{StaticResource NumUpDown1}" />
+                <toolkit:NumericUpDown x:Name="nudMaskBlue" DecimalPlaces="0" Minimum="0" Maximum="255" Increment="1" ValueChanged="nudMaskColor_ValueChanged" 
+                     Value="0"  Style="{StaticResource NumUpDown1}" />
+             </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
+                <TextBlock Text="Markers" Margin="0,0,10,0" Style="{StaticResource Label1}" />
+                <CheckBox x:Name="cbMarker" IsChecked="False" VerticalAlignment="Center" Click="cbMarker_Click" />
+                <StackPanel x:Name="spRingCB" Orientation="Horizontal" Visibility="Collapsed">
+                    <TextBlock Text="Circles" Margin="10,0,10,0" Style="{StaticResource Label1}" />
+                    <CheckBox x:Name="cbRings" IsChecked="False" VerticalAlignment="Center" Click="cbRings_Click" />
+                </StackPanel>
+            </StackPanel>
+            <StackPanel x:Name="spMarkerSpeed" Orientation="Vertical" Visibility="Collapsed">
+                <TextBlock Text="Rotational" Margin="0,5,0,0" Style="{StaticResource Label1}" />
+                <StackPanel Orientation='Horizontal' >
+                    <TextBlock Text="velocity" Margin="0,0,0,2" Style="{StaticResource Label1}" />
+                    <toolkit:NumericUpDown x:Name="nudMarkerSpeed" Minimum="-500.0" Maximum="500.0" ValueChanged="nudMarkerRotationSpeed_ValueChanged" Style="{StaticResource NumUpDown1}" />
+                    <TextBlock Text='°/sec' Margin='2' Style="{StaticResource Label1}"/>
+                </StackPanel>
+            </StackPanel>
+            <ListBox x:Name="TextureMap" Background="DarkBlue"  HorizontalAlignment="Left" Width="185" Height="35" Margin="0,10,0,0"
+                SelectionChanged="TextureMap_SelectionChanged" >
+                <TextBlock Text="Random dots" Style="{StaticResource Subtitle1}" />
+                <TextBlock Text="Periodic RD" Style="{StaticResource Subtitle1}" />
+                <TextBlock Text="No dots" Style="{StaticResource Subtitle1}" />
+                <TextBlock Text="Halfside dots" Style="{StaticResource Subtitle1}" />
+                <TextBlock Text="Spiraling pattern" Style="{StaticResource Subtitle1}" />
+                <TextBlock Text="Circ. lines 0°" Style="{StaticResource Subtitle1}" />
+                <TextBlock Text="Circ. lines 45°" Style="{StaticResource Subtitle1}" />
+                <TextBlock Text="Circ.lines 90°" Style="{StaticResource Subtitle1}" />
+                <TextBlock Text="Isolum. RD" Style="{StaticResource Subtitle1}" />
+
+            </ListBox>
+            <StackPanel x:Name="spMaskRotation" Orientation="Vertical" Visibility="Visible">
+                <TextBlock Text="Central mask rotational" Margin="0,5,0,0" Style="{StaticResource Label1}" />
+                <StackPanel Orientation='Horizontal'>
+                    <TextBlock Text="velocity" Margin="0,0,0,2" Style="{StaticResource Label1}" />
+                    <toolkit:NumericUpDown x:Name="nudMaskRotationSpeed" Minimum="-500.0" Maximum="999" ValueChanged="nudMaskRotationSpeed_ValueChanged" Style="{StaticResource NumUpDown1}" />
+                    <TextBlock Text='°/sec' Margin='2' Style="{StaticResource Label1}"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel x:Name="spMaskSize" Orientation='Horizontal' Visibility="Visible">
+                <TextBlock Text="Mask size" Margin="0,0,0,2" Style="{StaticResource Label1}" />
+                <toolkit:NumericUpDown x:Name="nudMaskSize" Minimum="0" Maximum ="250"  Increment="5" Value="100"
+                    ValueChanged="nudMaskSize_ValueChanged" Style="{StaticResource NumUpDown1}" />
+                <TextBlock Text='%' Margin='2' Style="{StaticResource Label1}"/>
+            </StackPanel>
+            <StackPanel Orientation='Horizontal' x:Name="spTextureScale" Visibility="Visible">
+                <TextBlock Text="Texture scale" Margin="0,0,0,2" Style="{StaticResource Label1}" />
+                <toolkit:NumericUpDown x:Name="nudMaskScale" Minimum="50.0" Maximum ="2000"  Increment="10" DecimalPlaces="0" Value="100.0"
+                    ValueChanged="nudMaskScale_ValueChanged" Style="{StaticResource NumUpDown1}" />
+                <TextBlock Text='%' Margin='2' Style="{StaticResource Label1}"/>
+            </StackPanel>
+            <StackPanel x:Name="spMaskScaling" Orientation="Vertical" Visibility="Visible" >
+                <TextBlock Text="Temporal mask scaling" Margin="0,2,0,0" Style="{StaticResource Label1}" />
+                <StackPanel Orientation='Horizontal'>
+                    <TextBlock Text="frequency" Margin="0,0,0,2" Style="{StaticResource Label1}" />
+                    <toolkit:NumericUpDown x:Name="nudMaskScalingFrequency" Minimum="-999.0" Maximum="999.0" Increment="0.05" DecimalPlaces="2" Width="70"
+                       Value="0" ValueChanged="nudFrequency_ValueChanged" Style="{StaticResource NumUpDown1}" />
+                </StackPanel>
+            </StackPanel>
+            <StackPanel x:Name="spMaskOffset" Orientation="Vertical" Visibility="Collapsed">
+                <TextBlock Text="Mask's center of rotation" Margin="0,2,0,2" Style="{StaticResource Label1}" />
+                <StackPanel Orientation="Horizontal" >
+                    <TextBlock Text="Hor. offset " Margin="0,0,0,2" Style="{StaticResource Label1}" />
+                    <toolkit:NumericUpDown x:Name="nudMaskXOffset" Minimum="-100.0" Maximum="100.0" Increment="1.0" DecimalPlaces="0"
+                        ValueChanged="nudMaskOffset_ValueChanged" Style="{StaticResource NumUpDown1}" />
+                    <TextBlock Text='%' Margin='2' Style="{StaticResource Label1}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" >
+                    <TextBlock Text="Vert. offset" Margin="0,0,0,2" Style="{StaticResource Label1}" />
+                    <toolkit:NumericUpDown x:Name="nudMaskYOffset" Minimum="-60.0" Maximum="60.0" Increment="5.0" DecimalPlaces="0"
+                        ValueChanged="nudMaskOffset_ValueChanged" Style="{StaticResource NumUpDown1}" />
+                    <TextBlock Text='%' Margin='2' Style="{StaticResource Label1}"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel x:Name="spFlicker" Orientation="Horizontal"  Margin="0,5,0,0" Visibility="Visible">
+                <TextBlock Text="Pseudo flicker" Margin="0,0,10,0" Style="{StaticResource Label1}" />
+                <CheckBox x:Name="cbFlicker" VerticalAlignment="Center"  Click="cbFlicker_Click" IsChecked="False" />
+            </StackPanel>
+            <!--<Button Content="Reset" Margin="0,10,0,0" Height="25" Name="btnReset" Width="74" HorizontalAlignment="Left" Click="btnReset_Click" 
+                    FontSize="16" FontFamily="Trebuchet MS" Foreground="DarkBlue" />-->
+
+            <!--Out of Browser installion-->
+            <!--
+            <TextBlock x:Name="networkIndicator" Margin="0,5,0,0"  Style="{StaticResource Label1}"/>
+            <Button x:Name="installButton" Content="Install"  HorizontalAlignment="Left" Margin="0,10" Padding="10,5" Click="installButton_Click"
+                     FontSize="16" FontFamily="Trebuchet MS" Foreground="DarkBlue" />
+            <Button x:Name="updateButton" Content="Check for update" HorizontalAlignment="Left" Margin="0,0" Padding="10,5"  Click="updateButton_Click"
+                     FontSize="16" FontFamily="Trebuchet MS" Foreground="DarkBlue" />-->
+            <!--Out of Browser installion-->
+
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="1" Margin="0,0,0,0" HorizontalAlignment="Left"  VerticalAlignment="Top">
+            <Canvas x:Name="IllusionPanel" Height="680" Width="1040" Background="RoyalBlue" >
+                <Canvas.Clip>
+                    <RectangleGeometry x:Name="IllusionClip" Rect=" 0,0,1040,680" />
+                </Canvas.Clip>
+                <Canvas x:Name="canvasSpokewheel" Canvas.Left="0" Canvas.Top="0" Canvas.ZIndex="0" >
+                    <Canvas.Resources>
+                        <Storyboard x:Name="MotionGenerator">
+                            <DoubleAnimation x:Name="aniMaskRot"
+                                Storyboard.TargetName="MaskRotPS" Storyboard.TargetProperty="Angle"
+                                    RepeatBehavior="Forever"/>
+                            <DoubleAnimation x:Name="aniWheelRot"
+                                Storyboard.TargetName="CenterPS" Storyboard.TargetProperty="Angle"  AutoReverse="False"
+                                    RepeatBehavior="Forever" />
+                            <DoubleAnimation x:Name="aniWheelScale"
+                                Storyboard.TargetName="CenterPS" Storyboard.TargetProperty="WheelScale" AutoReverse="False"
+                                    RepeatBehavior="Forever" />
+                            <DoubleAnimation x:Name="aniMaskScale" 
+                                Storyboard.TargetName="CenterPS" Storyboard.TargetProperty="MaskScale" AutoReverse="False"
+                                RepeatBehavior="Forever" />
+                            <DoubleAnimation x:Name="aniMarkerRot"
+                                Storyboard.TargetName="MarkerPS" Storyboard.TargetProperty="WheelAngle"
+                                    RepeatBehavior="Forever" />
+                            <DoubleAnimation x:Name="aniMarkerScale"
+                                Storyboard.TargetName="MarkerPS" Storyboard.TargetProperty="WheelScale" AutoReverse="False"
+                                    RepeatBehavior="Forever" />
+                            <DoubleAnimation x:Name="aniMarker2Scale"
+                                Storyboard.TargetName="Marker2PS" Storyboard.TargetProperty="WheelScale" AutoReverse="False"
+                                    RepeatBehavior="Forever" />
+                            <PointAnimation x:Name="aniFlicker"
+                                Storyboard.TargetName="CenterPS" Storyboard.TargetProperty="WheelTranslation" AutoReverse="False"
+                                    RepeatBehavior="Forever" />
+                        </Storyboard>
+                    </Canvas.Resources>
+                </Canvas>
+                <Canvas Width="1024" Height="1024" >
+                    <Image x:Name="imgSectors" Source="8HalfPeriodSectors1024Gauss5.jpg" Visibility="Collapsed" />
+                    <Image x:Name="imgRHSpirals" Source="6CWHalfPeriodSpirals1024Gauss5.jpg" Visibility="Collapsed" />
+                    <Image x:Name="imgLHSpirals" Source="6CCWHalfperiodSpirals1024Gauss5.jpg" Visibility="Collapsed" />
+                    <Image x:Name="imgRings" Source="HalfPeriodRings1024Gauss5.jpg" Visibility="Collapsed" />
+                    <Image x:Name="imgWheel4" Source="4SpokeWheel.jpg" Visibility="Collapsed" />
+                    <Image x:Name="imgWheel8" Source="8SpokeWheel.jpg" Visibility="Collapsed" />
+                    <Image x:Name="imgWheel16" Source="16SpokeWheel.jpg" Visibility="Collapsed" />
+                    <Image x:Name="imgVSinus128" Source="VerticalGraySinusGrid128cPels_1024.jpg" Visibility="Collapsed" />
+                    <Image x:Name="imgVSinus256" Source="VerticalGraySinusGrid256cPels_1024.jpg" Visibility="Collapsed" />
+                    <Image x:Name="imgHSinus128" Source="HorGraySin128+128_1024.jpg" Visibility="Collapsed" />
+                    <Image x:Name="imgHSinus256" Source="HorGraySin256+128_1024.jpg" Visibility="Collapsed" />
+                    <Image x:Name="imgSteppedSectors" Source="GraySector12Wheel1024x1024.png" Visibility="Collapsed" />
+                </Canvas>
+                <Border x:Name="borderDepthMarker2" Width="1024" Height="1024">
+                    <Border x:Name="borderDepthMarker" Width="1024" Height="1024" >
+                        <Border x:Name="borderCnvMask" Width="1024" Height="1024">
+                            <Canvas x:Name="cnvMask" Width="1024" Height="1024"  Loaded="cnvImageGround_Loaded" Margin="6,0,-6,0">
+                                <Image x:Name="imgRdDots1" Source="BWRandomDots2x2.jpg" Visibility="Collapsed"  />
+                                <Image x:Name="imgRDRings" Source="BWRDRingPattern1024.jpg" Visibility="Collapsed" />
+                                <Image x:Name="imgNoDots" Source="White.jpg" Visibility="Collapsed"/>
+                                <Image x:Name="imgHalfRdDots" Source="BWRandomDots2x2AndWhite.jpg" Visibility="Collapsed" />
+                                <Image x:Name="imgRDSpirals" Source="BWSpiralingCheckerBoard1024.jpg" Visibility="Collapsed" />
+                                <Image x:Name="imgTiltedLines90" Source="CircularLines2x12A0_1024x1024.jpg" Visibility="Collapsed" />
+                                <Image x:Name="imgTiltedLines45" Source="CircularLines2x12A45_1024x1024.jpg" Visibility="Collapsed" />
+                                <Image x:Name="imgTiltedLines0" Source="CircularLines2x12A90_1024x1024.jpg" Visibility="Collapsed" />
+ 
+                                <Canvas.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform x:Name="MaskScale" ScaleX="2" ScaleY="2" CenterX="512" CenterY="512" />
+                                    </TransformGroup>
+                                </Canvas.RenderTransform>
+                                <Canvas.Effect>
+                                    <effects:MakeRotationEffect x:Name="MaskRotPS" Radius="250.0" BW="0.0" Scale="1.0" />
+                                </Canvas.Effect>
+                            </Canvas>
+                            <Border.Effect>
+                                <effects:ColorFromMapEffect  x:Name="CenterPS" 
+                                    WheelZoom ="100" WheelScale="1"  />
+                            </Border.Effect>
+                        </Border>
+                       <Border.Effect>
+                            <effects:MakeDepthMarkerEffect x:Name="MarkerPS"  Threshold="1.1" WheelZoom="100"  />
+                        </Border.Effect>
+                    </Border>
+                    <Border.Effect>
+                        <effects:MakeDepthMarker2Effect x:Name="Marker2PS" Threshold="1.1" WheelZoom="100"  />
+                    </Border.Effect>
+                </Border>
+                <Ellipse x:Name="Nabel" Fill="DarkBlue" Width="105" Height="105" HorizontalAlignment="Center" VerticalAlignment="Center" Margin ="500,340,0,0" Visibility="Collapsed" />
+                <Ellipse x:Name="wNabel" Fill="DarkBlue" Width="145" Height="145" HorizontalAlignment="Center" VerticalAlignment="Center" Margin ="500,340,0,0" Visibility="Collapsed" />
+
+            </Canvas>
+        </StackPanel>
+    </Grid>
+</UserControl>
